@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+:root {
+	--color--text--dark--blue: #0f303f;
+	--color--text--grey: #b7c1c5;
+	--color--text--dark--white: #eae9e8;
+	--color--text--white: #ffffff;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-family: 'Avenir';
+}
+.App {
+	display: flex;
+	max-width: 1440px;
+	width: 100%;
+	margin: 0 auto;
+}

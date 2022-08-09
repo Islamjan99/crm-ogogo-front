@@ -1,0 +1,52 @@
+/* List Mentors */
+.mentors__wrapper {
+	width: 900px;
+	margin: 50px auto 0 auto;
+}
+.create__mentor {
+}
+.mentors__container {
+	border-top: 1px solid #1f1f1f;
+	border-right: 1px solid #1f1f1f;
+	border-left: 1px solid #1f1f1f;
+	-webkit-box-shadow: 0px 0px 48px 1px rgba(34, 60, 80, 0.2);
+	-moz-box-shadow: 0px 0px 48px 1px rgba(34, 60, 80, 0.2);
+	box-shadow: 0px 0px 48px 1px rgba(34, 60, 80, 0.2);
+}
+.mentors__info {
+	display: flex;
+	padding: 0 15px;
+	text-align: center;
+	justify-content: space-between;
+	font-size: 18px;
+	font-weight: 600;
+}
+/* Mentor item */
+.mentor__item {
+	text-align: center;
+	display: flex;
+	margin: 0 auto;
+	border-bottom: 1px solid #1f1f1f;
+	padding: 15px;
+	justify-content: space-between;
+}
+
+.mentor__quantity {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 250px;
+	font-size: 18px;
+}
+.mentor__name {
+	width: 200px;
+	font-size: 18px;
+}
+.mentor__secondName {
+	width: 200px;
+	font-size: 18px;
+}
+.mentor__phone {
+	width: 150px;
+	font-size: 18px;
+}

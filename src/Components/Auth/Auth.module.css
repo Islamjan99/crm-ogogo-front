@@ -1,0 +1,43 @@
+.Auth__wrapper {
+	max-width: 425px;
+	width: 100%;
+	margin: 150px auto 0 auto;
+	padding: 77px 87px;
+	-webkit-box-shadow: 4px 4px 77px 0px rgba(37, 51, 62, 0.2);
+	-moz-box-shadow: 4px 4px 77px 0px rgba(37, 51, 62, 0.2);
+	box-shadow: 4px 4px 77px 0px rgba(37, 51, 62, 0.2);
+}
+.Auth__container {
+	max-width: 250px;
+	width: 100%;
+}
+.inp__email {
+	padding: 5px 0;
+	border-bottom: 1px solid #254a5a;
+}
+.inp__password {
+	border-bottom: 1px solid #254a5a;
+	margin: 20px 0 0 0;
+	padding: 5px 0;
+	display: flex;
+	justify-content: space-between;
+}
+.auth__btn {
+	background: #0f303f;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+.auth__btn:active {
+	-webkit-box-shadow: 4px 4px 42px -8px rgba(15, 48, 63, 0.5);
+	-moz-box-shadow: 4px 4px 42px -8px rgba(15, 48, 63, 0.5);
+	box-shadow: 4px 4px 42px -8px rgba(15, 48, 63, 0.5);
+}
+
+@media all and (max-width: 500px) {
+	.Auth__wrapper {
+		max-width: 300px;
+		padding: 27px 37px;
+		margin-top: 50px;
+	}
+}

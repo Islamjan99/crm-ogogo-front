@@ -1,0 +1,24 @@
+.navBar__wrapper {
+	height: 100%;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+}
+.navBar__wrapper div {
+	width: 180px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	border-radius: 10px;
+	cursor: pointer;
+	padding: 5px;
+}
+.navBar__mentors {
+	background: #313a3e;
+}
+.navBar__courses {
+	background: #35505b;
+}
+.navBar__students {
+	background: #196a8d;
+}
