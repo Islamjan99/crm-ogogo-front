@@ -6,28 +6,28 @@ import MentorItem from './MentorItem'
 import P from '../UI/P'
 import Button from '../UI/Button'
 import ModalsMentor from './ModalsMentor'
+import axios from "axios";
+
+
 
 const Mentor = () => {
 	const { MentorsStore } = useContext(Context)
 	const [mentors, setMentors] = useState([])
 
 	useEffect(() => {
-		if (mentors < 1) {
-			fetchMentors()
-				.then(item => MentorsStore.setMentors(item))
-				.then(item => setMentors(item))
-			setMentors(MentorsStore.mentors)
+		if (mentors.length < 1) {
+			axios.get('http://127.0.0.1:8000/api/mentor/').then(data => setMentors(data.data))
 		}
 	}, [mentors])
-	const handleQuantity_of_classes = () => {}
+	console.log(mentors)
 
-	const plus = id => {
-		MentorsStore.mentors.map(item => {
-			if (item.id === id) {
-				putMentors()
-			}
-		})
-	}
+	// const plus = id => {
+	// 	MentorsStore.mentors.map(item => {
+	// 		if (item.id === id) {
+	// 			putMentors()
+	// 		}
+	// 	})
+	// }
 
 	return (
 		<div className={styles.mentors__wrapper}>
@@ -55,10 +55,11 @@ const Mentor = () => {
 							Количестко проведенных занятий за месяц
 						</P>
 					</div>
+					<P className={styles.mentor__secondName}>Редактировать</P>
 				</div>
 				<div>
-					{MentorsStore.mentors.map(mentor => {
-						return <MentorItem key={mentor.id} mentor={mentor} plus={plus} />
+					{mentors.map(mentor => {
+						return <MentorItem key={mentor.id} mentor={mentor}/>
 					})}
 				</div>
 			</div>
