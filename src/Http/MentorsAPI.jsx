@@ -2,13 +2,17 @@ import { $authHost, $host } from './index'
 import jwt_decode from 'jwt-decode'
 
 export const fetchMentors = async () => {
-	const { data } = await $host.get('/Mentors')
+	const { data } = await $host.get('mentor/')
+	return data
+}
+export const createMentor = async mentor => {
+	const { data } = await $host.post('mentor/create/', mentor)
 	return data
 }
 
 export const putMentors = async (mentors, id) => {
 	// const { data } = await $host.post(`/Mentors/${id}`, mentors)
-	console.log(mentors)
+	// console.log(mentors)
 	// localStorage.setItem('token', data.token)
 	// return jwt_decode(data.token)
 }

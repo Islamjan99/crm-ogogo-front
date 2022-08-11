@@ -1,6 +1,6 @@
 /* List Mentors */
 .mentors__wrapper {
-	width: 900px;
+	width: 1000px;
 	margin: 50px auto 0 auto;
 }
 .create__mentor {
@@ -15,39 +15,67 @@
 }
 .mentors__info {
 	background-color: #196a8d;
-	display: flex;
 	padding: 0 15px;
-	text-align: center;
-	justify-content: space-between;
 	font-size: 18px;
 	font-weight: 600;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	/* grid-template-rows: repeat(1, 1fr); */
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	text-align: center;
 }
 /* Mentor item */
 .mentor__item {
-	text-align: center;
-	display: flex;
 	margin: 0 auto;
 	border-bottom: 1px solid #1f1f1f;
 	padding: 15px;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	/* grid-template-rows: repeat(1, 1fr); */
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	text-align: center;
 }
 
-.mentor__quantity {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 250px;
-	font-size: 18px;
+.mentor__edit {
 }
 .mentor__name {
-	width: 200px;
 	font-size: 18px;
 }
 .mentor__secondName {
-	width: 200px;
 	font-size: 18px;
 }
 .mentor__phone {
-	width: 150px;
 	font-size: 18px;
+}
+/* Create */
+.createMentor__wrapper {
+	width: 100%;
+	height: 100vh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgba(170, 170, 170, 0.5);
+}
+.createMentor__container {
+	border: 1px solid black;
+	border-radius: 20px;
+	padding: 15px;
+	width: 500px;
+	height: 400px;
+	background: white;
+}
+.createMentor__inp {
+	border: 1px solid black;
+	margin: 15px 0;
+	padding: 10px;
+}
+.createMentor__btn {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
 }

@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 const $host = axios.create({
-	baseURL: 'https://629721168d77ad6f75fb59f5.mockapi.io/',
+	baseURL: 'http://127.0.0.1:8000/api/',
 })
 
 const $authHost = axios.create({
-	baseURL: 'https://629721168d77ad6f75fb59f5.mockapi.io/',
+	baseURL: 'http://127.0.0.1:8000/api/',
 })
 
 const authInterceptor = config => {
