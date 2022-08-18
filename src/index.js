@@ -23,6 +23,5 @@ root.render(
 				<App />
 			</BrowserRouter>
 		</Context.Provider>
-		,
 	</StrictMode>
 )

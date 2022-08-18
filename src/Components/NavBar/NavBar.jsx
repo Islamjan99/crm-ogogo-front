@@ -3,42 +3,78 @@ import { Link } from 'react-router-dom'
 import Img from '../UI/Img'
 import P from '../UI/P'
 import styles from './NavBar.module.css'
-import mentors from './icon-mentor.svg'
-import students from './icon-student.svg'
+import courses from './element-3.svg'
+import mentors from './document-text.svg'
+import students from './activity.svg'
 
 const NavBar = () => {
 	return (
 		<div className={styles.navBar__wrapper}>
-			<Link to={'/mentors'}>
-				<div className={styles.navBar__mentors}>
-					<P style={{ color: '#b7c1c5' }}>Менторы</P>
-					<Img
-						style={{ width: '40px', height: '48px' }}
-						src={mentors}
-						alt={'icon students'}
-					/>
-				</div>
-			</Link>
-			<Link to={'/courses'}>
-				<div className={styles.navBar__courses}>
-					<P style={{ color: '#b7c1c5' }}>Курсы</P>
-					<Img
-						style={{ width: '40px', height: '48px' }}
-						src={students}
-						alt={'icon students'}
-					/>
-				</div>
-			</Link>
-			<Link to={'/students'}>
-				<div className={styles.navBar__students}>
-					<P style={{ color: '#b7c1c5' }}>Ученики</P>
-					<Img
-						style={{ width: '40px', height: '48px' }}
-						src={students}
-						alt={'icon students'}
-					/>
-				</div>
-			</Link>
+			<div className={styles.navBar__nav}>
+				<Link to={'/courses'}>
+					<div className={styles.snavBar__courses}>
+						<Img
+							style={{ width: '25px', margin: '0 12.64px 0 0' }}
+							src={courses}
+							alt={'icon students'}
+						/>
+						<P
+							style={{
+								color: '#b7c1c5',
+								fontWeight: '500',
+								fontSize: '22.7504px',
+								lineHeight: '19px',
+								fontFeatureSettings: "'pnum' on, 'lnum' on",
+								color: '#FFFFFF',
+							}}
+						>
+							Курсы
+						</P>
+					</div>
+				</Link>
+				<Link to={'/mentors'}>
+					<div>
+						<Img
+							style={{ width: '25px', margin: '0 12.64px 0 0' }}
+							src={mentors}
+							alt={'icon students'}
+						/>
+						<P
+							style={{
+								color: '#b7c1c5',
+								fontWeight: '500',
+								fontSize: '22.7504px',
+								lineHeight: '19px',
+								fontFeatureSettings: "'pnum' on, 'lnum' on",
+								color: '#FFFFFF',
+							}}
+						>
+							Менторы
+						</P>
+					</div>
+				</Link>
+				<Link to={'/students'}>
+					<div className={styles.navBar__students}>
+						<Img
+							style={{ width: '25px', margin: '0 12.64px 0 0' }}
+							src={students}
+							alt={'icon students'}
+						/>
+						<P
+							style={{
+								color: '#b7c1c5',
+								fontWeight: '500',
+								fontSize: '22.7504px',
+								lineHeight: '19px',
+								fontFeatureSettings: "'pnum' on, 'lnum' on",
+								color: '#FFFFFF',
+							}}
+						>
+							Студенты
+						</P>
+					</div>
+				</Link>
+			</div>
 		</div>
 	)
 }

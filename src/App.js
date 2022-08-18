@@ -6,6 +6,7 @@ import Header from './Components/Header/Header'
 import Mentors from './Components/Mentor/Mentors'
 import Students from './Components/Students/Students'
 import Courses from './Components/Courses/Courses'
+import ChangeMentor from './Components/Mentor/ChangeMentor'
 
 function App() {
 	return (
@@ -18,6 +19,8 @@ function App() {
 					<Route path='/mentors' element={<Mentors />} />
 					<Route path='/Courses' element={<Courses />} />
 					<Route path='/students' element={<Students />} />
+					<Route path='/change-mentor' element={<ChangeMentor />} />
+					<Route path='/change-mentor/:id' element={<ChangeMentor />} />
 				</Routes>
 			</Suspense>
 		</div>

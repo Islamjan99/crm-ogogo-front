@@ -1,9 +1,10 @@
 import React from 'react'
-import './UI.module.css'
+import style from './UI.module.css'
 
 const Img = ({ src, alt, isActive, setIsActive, ...props }) => {
 	return (
 		<img
+			className={style.img}
 			onClick={() => setIsActive(!isActive)}
 			src={src}
 			alt={alt}

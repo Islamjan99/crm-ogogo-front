@@ -2,15 +2,15 @@
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
-	min-height: 80vh;
-	margin: 10px 30px 0 0;
+	height: 100vh;
+	background: #11122c;
+	width: 357px;
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
 }
-.header__logo {
-	padding: 17px 0;
-	width: 180px;
+.header__title {
 	display: flex;
 	justify-content: center;
-	background: #0f303f;
-	border-radius: 10px;
-	cursor: pointer;
+	align-items: center;
+	margin-top: 110px;
 }
