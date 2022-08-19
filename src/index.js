@@ -1,7 +1,6 @@
 import { createContext, StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import MentorsStore from './GlobalStore/MentorsStore'
-import StudentsStore from './GlobalStore/StudentsStore'
+import Store from './GlobalStore/Store'
 import './Global.css'
 import App from './App'
 import { BrowserRouter } from 'react-router-dom'
@@ -15,8 +14,7 @@ root.render(
 	<StrictMode>
 		<Context.Provider
 			value={{
-				MentorsStore: new MentorsStore(),
-				devStudentsStoreice: new StudentsStore(),
+				Store: new Store(),
 			}}
 		>
 			<BrowserRouter>

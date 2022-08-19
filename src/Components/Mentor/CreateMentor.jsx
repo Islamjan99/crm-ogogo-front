@@ -3,10 +3,11 @@ import styles from './Mentor.module.css'
 import P from '../UI/P'
 import Input from '../UI/Input'
 import Button from '../UI/Button'
-import { createMentor } from '../../Http/MentorsAPI'
+import { createMentor } from '../../Http/API'
 
 const CreateMentor = ({ show, setShow }) => {
 	const [mentor, setMentor] = useState({})
+	const [isOpen, setIsOpen] = useState(false)
 
 	const changeHandler = event => {
 		setMentor({ ...mentor, [event.target.name]: event.target.value })
@@ -17,12 +18,14 @@ const CreateMentor = ({ show, setShow }) => {
 		{ type: 'text', name: 'second_name', placeholder: 'Введите фамилию' },
 		{ type: 'text', name: 'phone', placeholder: '+996 000 000 000' },
 	]
+	const hidden = () => {
+		createMentor(mentor).then(data => console.log(data))
+		setShow(false)
+		window.location.reload()
+	}
 
 	return (
 		<div
-			// onClick={() => {
-			// 	setShow(false)
-			// }}
 			className={
 				show ? styles.createMentor__wrapper : styles.createMentor__none
 			}
@@ -53,11 +56,11 @@ const CreateMentor = ({ show, setShow }) => {
 						<Button
 							onClick={() => {
 								if (
-									mentor.name !== null &&
-									mentor.second_name !== null &&
-									mentor.phone !== null
+									mentor.name !== undefined &&
+									mentor.second_name !== undefined &&
+									mentor.phone !== undefined
 								) {
-									createMentor(mentor).then(data => console.log(data))
+									hidden()
 								} else {
 									console.log(mentor)
 								}

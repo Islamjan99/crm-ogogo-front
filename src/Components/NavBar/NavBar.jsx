@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Img from '../UI/Img'
 import P from '../UI/P'
 import styles from './NavBar.module.css'
@@ -8,16 +8,18 @@ import mentors from './document-text.svg'
 import students from './activity.svg'
 
 const NavBar = () => {
+	const location = useLocation().pathname
 	return (
 		<div className={styles.navBar__wrapper}>
 			<div className={styles.navBar__nav}>
-				<Link to={'/courses'}>
-					<div className={styles.snavBar__courses}>
-						<Img
-							style={{ width: '25px', margin: '0 12.64px 0 0' }}
-							src={courses}
-							alt={'icon students'}
-						/>
+				<div
+					className={
+						location === '/courses'
+							? styles.active__courses
+							: styles.navBar__courses
+					}
+				>
+					<Link to={'/courses'}>
 						<P
 							style={{
 								color: '#b7c1c5',
@@ -30,15 +32,18 @@ const NavBar = () => {
 						>
 							Курсы
 						</P>
-					</div>
-				</Link>
-				<Link to={'/mentors'}>
-					<div>
-						<Img
-							style={{ width: '25px', margin: '0 12.64px 0 0' }}
-							src={mentors}
-							alt={'icon students'}
-						/>
+					</Link>
+					<Img style={{ width: '25px' }} src={courses} alt={'icon students'} />
+				</div>
+
+				<div
+					className={
+						location === '/mentors'
+							? styles.active__mentors
+							: styles.navBar__mentors
+					}
+				>
+					<Link to={'/mentors'}>
 						<P
 							style={{
 								color: '#b7c1c5',
@@ -51,15 +56,18 @@ const NavBar = () => {
 						>
 							Менторы
 						</P>
-					</div>
-				</Link>
-				<Link to={'/students'}>
-					<div className={styles.navBar__students}>
-						<Img
-							style={{ width: '25px', margin: '0 12.64px 0 0' }}
-							src={students}
-							alt={'icon students'}
-						/>
+					</Link>
+					<Img style={{ width: '25px' }} src={mentors} alt={'icon students'} />
+				</div>
+
+				<div
+					className={
+						location === '/students'
+							? styles.active__students
+							: styles.navBar__students
+					}
+				>
+					<Link to={'/students'}>
 						<P
 							style={{
 								color: '#b7c1c5',
@@ -72,8 +80,9 @@ const NavBar = () => {
 						>
 							Студенты
 						</P>
-					</div>
-				</Link>
+					</Link>
+					<Img style={{ width: '25px' }} src={students} alt={'icon students'} />
+				</div>
 			</div>
 		</div>
 	)

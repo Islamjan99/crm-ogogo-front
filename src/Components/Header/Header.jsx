@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from 'react'
-import { fetchMentors } from '../../Http/MentorsAPI'
+import { useContext, useEffect } from 'react'
+import { fetchCourses, fetchMentors } from '../../Http/API'
 import { Context } from '../../index'
 import { Link } from 'react-router-dom'
 import NavBar from '../NavBar/NavBar'
@@ -9,13 +9,13 @@ import styles from './Header.module.css'
 import H2 from '../UI/H2'
 
 const Header = () => {
-	const { MentorsStore } = useContext(Context)
+	const { Store } = useContext(Context)
 
 	useEffect(() => {
-		fetchMentors().then(item => MentorsStore.setMentors(item))
-	}, [])
+		fetchCourses().then(item => Store.setCourses(item))
+		fetchMentors().then(item => Store.setMentors(item))
+	}, [Store.mentors, Store.courses])
 
-	useEffect(() => {}, [])
 	return (
 		<div className={styles.header__wrapper}>
 			<Link to={'/'}>

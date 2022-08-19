@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { fetchMentors } from '../Http/MentorsAPI'
-import { Context } from '../index'
+import styles from '../Global.css'
 
 const Home = () => {
-	return <div>Home</div>
+	return <div className={styles.home__wrapper}>Home</div>
 }
 
 export default Home

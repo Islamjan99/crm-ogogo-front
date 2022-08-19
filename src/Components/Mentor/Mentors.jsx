@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styles from './Mentor.module.css'
-import { fetchMentors, putMentors } from '../../Http/MentorsAPI'
+import { fetchMentors, putMentors } from '../../Http/API'
 import { Context } from '../../index'
 import MentorItem from './MentorItem'
 import P from '../UI/P'
@@ -10,7 +10,7 @@ import { observer } from 'mobx-react-lite'
 import H1 from '../UI/H1'
 
 const Mentor = observer(() => {
-	const { MentorsStore } = useContext(Context)
+	const { Store } = useContext(Context)
 	const [mentors, setMentors] = useState([])
 	const [isOpen, setIsOpen] = useState(false)
 	useEffect(() => {}, [mentors])
@@ -36,6 +36,8 @@ const Mentor = observer(() => {
 								padding: '12px 15px',
 								fontSize: '18px',
 								cursor: 'pointer',
+								background: 'rgb(106, 199, 106)',
+								border: 'rgb(106, 199, 106)',
 							}}
 						>
 							Добавить ментора
@@ -50,7 +52,7 @@ const Mentor = observer(() => {
 					<P>Изменить</P>
 				</div>
 				<div>
-					{MentorsStore.mentors.map(mentor => {
+					{Store.mentors.map(mentor => {
 						return <MentorItem key={mentor.id} mentor={mentor} />
 					})}
 				</div>

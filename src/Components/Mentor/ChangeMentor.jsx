@@ -1,17 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styles from './Mentor.module.css'
-import { Redirect, useParams } from 'react-router-dom'
+import { Redirect, useNavigate, useParams } from 'react-router-dom'
 import { Context } from '../../index'
 import P from '../UI/P'
 import Input from '../UI/Input'
 import Button from '../UI/Button'
+import { deleteMentor, updateMentor } from '../../Http/API'
+import H2 from '../UI/H2'
 
 const ChangeMentor = () => {
-	const { MentorsStore } = useContext(Context)
+	const { Store } = useContext(Context)
+	let navigate = useNavigate()
 	const [mentor, setMentor] = useState([])
-	const [mentorInfo, setMentorInfo] = useState([])
-	const [changementor, setChangeMentor] = useState(['as'])
-	let mentorId = useParams().id
+	const [hidden, setHidden] = useState(false)
+	const [show, setShow] = useState(false)
+	const [changementor, setChangeMentor] = useState([])
+	const [mentorId, setmentorId] = useState(useParams().id)
 
 	useEffect(() => {
 		if (mentor.length < 1) {
@@ -19,7 +23,8 @@ const ChangeMentor = () => {
 		}
 	}, [mentor])
 	const getItem = () => {
-		let i = MentorsStore.mentors.filter((item, index) => mentorId == index)
+		let i = Store.mentors.filter(item => mentorId == item.id)
+		setMentor(i)
 		i.map(item =>
 			setChangeMentor({
 				...changementor,
@@ -28,14 +33,21 @@ const ChangeMentor = () => {
 				phone: item.phone,
 			})
 		)
-
-		setMentor(i)
 	}
 	const setInfo = event => {
 		setChangeMentor({
 			...changementor,
 			[event.target.name]: event.target.value,
 		})
+	}
+	const setUpData = () => {
+		updateMentor(mentorId, changementor).then(data =>
+			data.status >= 200 && data.status < 300
+				? console.log('goot')
+				: console.log('false')
+		)
+		setHidden(true)
+		setShow(true)
 	}
 	let form = [
 		{ type: 'text', name: 'name', placeholder: `${changementor.name}` },
@@ -46,6 +58,14 @@ const ChangeMentor = () => {
 		},
 		{ type: 'text', name: 'phone', placeholder: `${changementor.phone}` },
 	]
+	const shows = () => {
+		setShow(false)
+		setTimeout(() => {
+			setHidden(false)
+			navigate('/mentors')
+			window.location.reload()
+		}, 1100)
+	}
 	return (
 		<div className={styles.changeMentor__wrapper}>
 			<div className={styles.changeMentor__container}>
@@ -58,7 +78,11 @@ const ChangeMentor = () => {
 					</div>
 					{mentor.map((item, index) => {
 						return (
-							<form key={index} onChange={test} className={styles.changeMentor}>
+							<form
+								key={index}
+								onChange={setInfo}
+								className={styles.changeMentor}
+							>
 								{form.map(({ type, name, placeholder }, i) => {
 									return (
 										<Input
@@ -67,7 +91,13 @@ const ChangeMentor = () => {
 											name={name}
 											value={placeholder}
 											onChange={e => setChangeMentor(e)}
-											style={{ fontSize: '16px', width: '170px' }}
+											style={{
+												fontSize: '16px',
+												width: '170px',
+												border: '1px solid',
+												borderRadius: '5px',
+												paddingLeft: '5px',
+											}}
 										/>
 									)
 								})}
@@ -83,7 +113,7 @@ const ChangeMentor = () => {
 								mentor.second_name !== null &&
 								mentor.phone !== null
 							) {
-								console.log(changementor)
+								setUpData()
 							} else {
 								console.log(mentor)
 							}
@@ -102,17 +132,9 @@ const ChangeMentor = () => {
 						Сохранить
 					</Button>
 					<Button
-						onClick={() => {
-							if (
-								mentor.name !== null &&
-								mentor.second_name !== null &&
-								mentor.phone !== null
-							) {
-								console.log(changementor)
-							} else {
-								console.log(mentor)
-							}
-						}}
+						onClick={() =>
+							deleteMentor(mentorId).then(data => console.log(data))
+						}
 						style={{
 							padding: '12px 15px',
 							cursor: 'pointer',
@@ -125,6 +147,28 @@ const ChangeMentor = () => {
 						}}
 					>
 						удалить ментора
+					</Button>
+				</div>
+			</div>
+			<div className={hidden ? styles.model__wrapper : styles.model__none}>
+				<div className={show ? styles.model__container : styles.model}>
+					<H2>Сообщение</H2>
+					<P style={{ marginTop: '10px' }}>Изменения сохранены</P>
+
+					<Button
+						onClick={shows}
+						style={{
+							padding: '10px 20px',
+							marginTop: '70px',
+							padding: '12px 15px',
+							cursor: 'pointer',
+							borderRadius: '10px',
+							fontSize: '16px',
+							background: 'rgb(106, 199, 106)',
+							border: 'rgb(106, 199, 106)',
+						}}
+					>
+						OK
 					</Button>
 				</div>
 			</div>
