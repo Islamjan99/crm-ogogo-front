@@ -1,0 +1,5 @@
+export const AUTH_ROUTE = '/auth'
+export const MENTORS_ROUTE = '/mentors'
+export const COURSES_ROUTE = '/courses'
+export const HOME_ROUTE = '/'
+export const STUDENTS_ROUTE = '/students'

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './Auth.module.css'
 import H2 from '../UI/H2'
 import Input from '../UI/Input'
@@ -7,15 +7,24 @@ import imagePassword from './medical.svg'
 import imagePasswordHide from './hide_icon_184218.svg'
 import Button from '../UI/Button'
 import P from '../UI/P'
+import { Context } from '../..'
 
 const Auth = () => {
+	const { Store } = useContext(Context)
 	const [isActive, setIsActive] = useState(false)
-	const [email, setEmail] = useState()
-	const [password, setPassword] = useState()
+	const [user, setUser] = useState([])
 
 	useEffect(() => {}, [isActive])
 	const authorization = () => {}
-	console.log(isActive)
+	const changePassword = () => {
+		setIsActive(!isActive)
+	}
+	const setInfo = event => {
+		setUser({
+			...user,
+			[event.target.name]: event.target.value,
+		})
+	}
 	return (
 		<div className={styles.Auth__wrapper}>
 			<div className={styles.Auth__container}>
@@ -38,6 +47,8 @@ const Auth = () => {
 						style={{ fontSize: '16px', lineHeight: '170%', color: '#254A5A' }}
 						type={'email'}
 						place={'Email'}
+						name={'username'}
+						onChange={setInfo}
 					/>
 				</div>
 				<div className={styles.inp__password}>
@@ -45,13 +56,14 @@ const Auth = () => {
 						style={{ fontSize: '16px', lineHeight: '170%', color: '#254A5A' }}
 						type={isActive ? 'text' : 'password'}
 						place={'Пароль'}
+						name={'password'}
+						onChange={setInfo}
 					/>
 					<Img
+						onClick={changePassword}
 						style={{ cursor: 'pointer', width: '14px', height: '14px' }}
 						src={isActive ? imagePasswordHide : imagePassword}
 						alt={'img password'}
-						isActive={isActive}
-						setIsActive={setIsActive}
 					/>
 				</div>
 				<div className={styles.auth__btn}>

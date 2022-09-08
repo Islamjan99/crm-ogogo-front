@@ -7,7 +7,6 @@ import { createMentor } from '../../Http/API'
 
 const CreateMentor = ({ show, setShow }) => {
 	const [mentor, setMentor] = useState({})
-	const [isOpen, setIsOpen] = useState(false)
 
 	const changeHandler = event => {
 		setMentor({ ...mentor, [event.target.name]: event.target.value })
@@ -23,7 +22,6 @@ const CreateMentor = ({ show, setShow }) => {
 		setShow(false)
 		window.location.reload()
 	}
-
 	return (
 		<div
 			className={
@@ -33,9 +31,9 @@ const CreateMentor = ({ show, setShow }) => {
 			<div className={styles.createMentor__container}>
 				<div className={styles.createMentor__block}>
 					<div className={styles.createMentor__info}>
-						<P>Имя :</P>
-						<P>Фамилия :</P>
-						<P>номер телефона :</P>
+						<P style={{ borderBottom: '1px solid black' }}>Имя :</P>
+						<P style={{ borderBottom: '1px solid black' }}>Фамилия :</P>
+						<P style={{ borderBottom: '1px solid black' }}>номер телефона :</P>
 					</div>
 					<form onChange={changeHandler}>
 						{form.map(({ type, name, placeholder }, i) => {
@@ -45,7 +43,7 @@ const CreateMentor = ({ show, setShow }) => {
 									type={type}
 									name={name}
 									place={placeholder}
-									style={{ fontSize: '16px' }}
+									style={{ fontSize: '16px', borderBottom: '1px solid black' }}
 								/>
 							)
 						})}
@@ -58,22 +56,41 @@ const CreateMentor = ({ show, setShow }) => {
 								if (
 									mentor.name !== undefined &&
 									mentor.second_name !== undefined &&
-									mentor.phone !== undefined
+									mentor.phone !== undefined &&
+									mentor.name !== '' &&
+									mentor.second_name !== '' &&
+									mentor.phone !== ''
 								) {
 									hidden()
-								} else {
-									console.log(mentor)
 								}
 							}}
-							style={{
-								padding: '12px 15px',
-								cursor: 'pointer',
-								borderRadius: '10px',
-								fontSize: '16px',
-								background: 'rgb(106, 199, 106)',
-								border: 'rgb(106, 199, 106)',
-								fontWeight: '500',
-							}}
+							style={
+								mentor.name !== undefined &&
+								mentor.second_name !== undefined &&
+								mentor.phone !== undefined &&
+								mentor.name !== '' &&
+								mentor.second_name !== '' &&
+								mentor.phone !== ''
+									? {
+											padding: '12px 15px',
+											cursor: 'pointer',
+											borderRadius: '10px',
+											fontSize: '16px',
+											background: 'rgb(106, 199, 106)',
+											border: 'rgb(106, 199, 106)',
+											fontWeight: '500',
+									  }
+									: {
+											padding: '12px 15px',
+											cursor: 'pointer',
+											borderRadius: '10px',
+											fontSize: '16px',
+											background: 'rgba(106, 199, 106)',
+											opacity: '0.5',
+											border: 'rgb(106, 199, 106)',
+											fontWeight: '500',
+									  }
+							}
 						>
 							Создать ментора
 						</Button>

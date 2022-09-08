@@ -1,29 +1,32 @@
 import { useContext, useEffect } from 'react'
-import { fetchCourses, fetchMentors } from '../../Http/API'
+import {
+	fetchCourses,
+	fetchMentors,
+	fetchQuantity,
+	fetchStudents,
+} from '../../Http/API'
 import { Context } from '../../index'
 import { Link } from 'react-router-dom'
 import NavBar from '../NavBar/NavBar'
-import Img from '../UI/Img'
-import heart from './heart.svg'
-import styles from './Header.module.css'
+import styles from './SideBar.module.css'
 import H2 from '../UI/H2'
 
-const Header = () => {
+const SideBar = () => {
 	const { Store } = useContext(Context)
 
 	useEffect(() => {
 		fetchCourses().then(item => Store.setCourses(item))
 		fetchMentors().then(item => Store.setMentors(item))
-	}, [Store.mentors, Store.courses])
+		fetchStudents().then(item => Store.setStudents(item))
+		fetchQuantity().then(item => Store.setQuantity(item))
+	}, [Store, Store.mentors, Store.courses, Store.quantity, Store.students])
 
 	return (
-		<div className={styles.header__wrapper}>
+		<div className={styles.sideBar__wrapper}>
 			<Link to={'/'}>
-				<div className={styles.header__title}>
+				<div className={styles.sideBar__title}>
 					<H2
 						style={{
-							fontFamily: 'Muller-Trial',
-							fontStyle: 'normal',
 							fontWeight: '500',
 							fontSize: '32px',
 							lineHeight: '100%',
@@ -39,4 +42,4 @@ const Header = () => {
 	)
 }
 
-export default Header
+export default SideBar

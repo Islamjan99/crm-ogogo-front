@@ -2,7 +2,7 @@ import React from 'react'
 import './UI.module.css'
 
 const Span = ({ children, ...props }) => {
-	return <div {...props}>{children}</div>
+	return <span {...props}>{children}</span>
 }
 
 export default Span
