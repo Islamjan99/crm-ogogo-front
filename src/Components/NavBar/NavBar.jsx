@@ -6,12 +6,34 @@ import styles from './NavBar.module.css'
 import courses from './element-3.svg'
 import mentors from './document-text.svg'
 import students from './activity.svg'
+import logout from './logout.svg'
 
 const NavBar = () => {
 	const location = useLocation().pathname
 	return (
 		<div className={styles.navBar__wrapper}>
 			<div className={styles.navBar__nav}>
+				<div
+					className={
+						location === '/sub-Admin'
+							? styles.active__subAdmin
+							: styles.navBar__subAdmin
+					}
+				>
+					<Link to={'/sub-Admin'}>
+						<P
+							style={{
+								fontWeight: '500',
+								fontSize: '22.7504px',
+								lineHeight: '19px',
+								fontFeatureSettings: "'pnum' on, 'lnum' on",
+								color: '#FFFFFF',
+							}}
+						>
+							пользователи
+						</P>
+					</Link>
+				</div>
 				<div
 					className={
 						location === '/courses'
@@ -22,7 +44,6 @@ const NavBar = () => {
 					<Link to={'/courses'}>
 						<P
 							style={{
-								color: '#b7c1c5',
 								fontWeight: '500',
 								fontSize: '22.7504px',
 								lineHeight: '19px',
@@ -46,7 +67,6 @@ const NavBar = () => {
 					<Link to={'/mentors'}>
 						<P
 							style={{
-								color: '#b7c1c5',
 								fontWeight: '500',
 								fontSize: '22.7504px',
 								lineHeight: '19px',
@@ -70,7 +90,6 @@ const NavBar = () => {
 					<Link to={'/students'}>
 						<P
 							style={{
-								color: '#b7c1c5',
 								fontWeight: '500',
 								fontSize: '22.7504px',
 								lineHeight: '19px',
@@ -83,6 +102,42 @@ const NavBar = () => {
 					</Link>
 					<Img style={{ width: '25px' }} src={students} alt={'icon students'} />
 				</div>
+				<div
+					className={
+						location === '/type-course'
+							? styles.active__typeCourse
+							: styles.navBar__typeCourse
+					}
+				>
+					<Link to={'/type-course'}>
+						<P
+							style={{
+								fontWeight: '500',
+								fontSize: '22.7504px',
+								lineHeight: '19px',
+								fontFeatureSettings: "'pnum' on, 'lnum' on",
+								color: '#FFFFFF',
+							}}
+						>
+							Тип курса
+						</P>
+					</Link>
+				</div>
+			</div>
+			<div className={styles.navBar__logout}>
+				<P
+					style={{
+						fontWeight: '500',
+						fontSize: '22.7504px',
+						lineHeight: '19px',
+						fontFeatureSettings: "'pnum' on, 'lnum' on",
+						color: '#FFFFFF',
+					}}
+				>
+					Выйти
+				</P>
+
+				<Img style={{ width: '25px' }} src={logout} alt={'icon students'} />
 			</div>
 		</div>
 	)

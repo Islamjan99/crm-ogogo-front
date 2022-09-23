@@ -1,21 +1,36 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styles from './Auth.module.css'
-import H2 from '../UI/H2'
+import HTag from '../UI/Htag'
 import Input from '../UI/Input'
 import Img from '../UI/Img'
 import imagePassword from './medical.svg'
 import imagePasswordHide from './hide_icon_184218.svg'
-import Button from '../UI/Button'
 import P from '../UI/P'
 import { Context } from '../..'
+import { login } from '../../Http/API'
+import jwt_decode from 'jwt-decode'
+import { useNavigate } from 'react-router-dom'
 
 const Auth = () => {
 	const { Store } = useContext(Context)
 	const [isActive, setIsActive] = useState(false)
 	const [user, setUser] = useState([])
+	let navigate = useNavigate()
 
-	useEffect(() => {}, [isActive])
-	const authorization = () => {}
+	const authorization = () => {
+		login(user).then(data => {
+			console.log(data)
+			if (data.status < 300) {
+				Store.setUser(jwt_decode(data.data.access))
+				sessionStorage.setItem('token', JSON.stringify(data.data.access))
+				navigate('/courses')
+				window.location.reload()
+			} else {
+				alert('Ошибка! Проверьте логин или пароль')
+			}
+		})
+	}
+
 	const changePassword = () => {
 		setIsActive(!isActive)
 	}
@@ -25,10 +40,12 @@ const Auth = () => {
 			[event.target.name]: event.target.value,
 		})
 	}
+
 	return (
 		<div className={styles.Auth__wrapper}>
-			<div className={styles.Auth__container}>
-				<H2
+			<form className={styles.Auth__container}>
+				<HTag
+					tag={'h2'}
 					style={{
 						textAlign: 'center',
 						fontSize: '25px',
@@ -41,12 +58,13 @@ const Auth = () => {
 					}}
 				>
 					Вход
-				</H2>
+				</HTag>
 				<div className={styles.inp__email}>
 					<Input
 						style={{ fontSize: '16px', lineHeight: '170%', color: '#254A5A' }}
-						type={'email'}
-						place={'Email'}
+						type={'text'}
+						place={'user name'}
+						autoComplete='name'
 						name={'username'}
 						onChange={setInfo}
 					/>
@@ -55,7 +73,8 @@ const Auth = () => {
 					<Input
 						style={{ fontSize: '16px', lineHeight: '170%', color: '#254A5A' }}
 						type={isActive ? 'text' : 'password'}
-						place={'Пароль'}
+						autoComplete='current-password'
+						place={'password'}
 						name={'password'}
 						onChange={setInfo}
 					/>
@@ -67,7 +86,8 @@ const Auth = () => {
 					/>
 				</div>
 				<div className={styles.auth__btn}>
-					<Button
+					<P
+						onClick={() => authorization()}
 						style={{
 							color: '#EAE9E8',
 							fontWeight: '800',
@@ -81,9 +101,9 @@ const Auth = () => {
 						}}
 					>
 						Войти
-					</Button>
+					</P>
 				</div>
-			</div>
+			</form>
 		</div>
 	)
 }

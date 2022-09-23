@@ -11,7 +11,7 @@ const StudentItem = ({ student }) => {
 	const [course, setCourse] = useState({})
 
 	const getCourse = () => {
-		Store.courses.map(item => {
+		Store.allCourses.map(item => {
 			if (item.id === student.course) {
 				setCourse(item)
 			}
@@ -26,62 +26,82 @@ const StudentItem = ({ student }) => {
 		)
 		getCourse()
 	}, [student])
-	const changeStudent = () => {
-		Store.setSelectedStudents(student)
-		navigate(`/change-student/${student.id}`)
+	const changeStudent = str => {
+		if (str === 'student') {
+			Store.setSelectedStudents(student)
+			navigate(`/change-student/${student.id}`)
+		} else {
+			if (course.name !== undefined) {
+				Store.setSelectedStudents(student)
+				navigate(`/course-page/${student.id}`)
+			} else {
+				Store.setSelectedStudents(student)
+				navigate(`/change-student/${student.id}`)
+			}
+		}
 	}
 	return (
-		<div className={styles.student__item} onClick={changeStudent}>
+		<div className={styles.student__item}>
 			<P
+				onClick={() => changeStudent('student')}
 				style={{
 					fontWeight: '400',
 					fontSize: '18px',
 					lineHeight: '100%',
 					padding: '8px 0',
+					cursor: 'pointer',
 				}}
 			>
 				{student.first_name}
 			</P>
 			<div className={styles.line}></div>
 			<P
+				onClick={() => changeStudent('student')}
 				style={{
 					fontWeight: '400',
 					fontSize: '18px',
 					lineHeight: '100%',
 					padding: '8px 0',
+					cursor: 'pointer',
 				}}
 			>
 				{student.second_name}
 			</P>
 			<div className={styles.line}></div>
 			<P
+				onClick={() => changeStudent('student')}
 				style={{
 					fontWeight: '400',
 					fontSize: '18px',
 					lineHeight: '100%',
 					padding: '8px 0',
+					cursor: 'pointer',
 				}}
 			>
 				{student.phone}
 			</P>
 			<div className={styles.line}></div>
 			<P
+				onClick={() => changeStudent('course')}
 				style={{
 					fontWeight: '400',
 					fontSize: '18px',
 					lineHeight: '100%',
 					padding: '8px 0',
+					cursor: 'pointer',
 				}}
 			>
 				{course.name}
 			</P>
 			<div className={styles.line}></div>
 			<P
+				onClick={() => changeStudent('student')}
 				style={{
 					fontWeight: '400',
 					fontSize: '18px',
 					lineHeight: '100%',
 					padding: '8px 0',
+					cursor: 'pointer',
 				}}
 			>
 				{paid}

@@ -3,18 +3,23 @@ import JWTdecode from 'jwt-decode'
 
 export default class Store {
 	constructor() {
-		this._isAuth = true
+		this._isAuth = false
 		this._user = {}
+		this._token = ''
 		this._page = 1
 		this._totalCount = 0
 		this._limit = 9
 		this._role = {}
 		this._users = []
+		this._admin = ''
 		this._quantityOfClasses = []
 		this._mentors = []
-		this._selectedMentor = []
+		this._selectedMentor = {}
+		this._typeCourse = []
+		this._selectedTypeCourse = []
 		this._courses = []
 		this._courseType = []
+		this._allCourses = []
 		this._students = []
 		this._selectedCourse = {}
 		this._selectedStudents = {}
@@ -24,17 +29,34 @@ export default class Store {
 	setIsAuth(bool) {
 		this._isAuth = bool
 	}
-	setUser(bool) {
-		this._user = bool
+	setUser(user) {
+		this._user = user
+	}
+	setUsers() {
+		let i = null
+		if (
+			sessionStorage.getItem('token') !== null &&
+			sessionStorage.getItem('token') !== undefined
+		) {
+			let token = sessionStorage.getItem('token').replace(/^"(.*)"$/, '$1')
+			this._token = token
+			i = JWTdecode(token)
+		}
+
+		this._users = i
+		return i
+	}
+	setToken(token) {
+		this._token = token
+	}
+	setAdmin(admin) {
+		this._admin = admin
 	}
 	setPage(page) {
 		this._page = page
 	}
 	setTotalCount(count) {
 		this._totalCount = count
-	}
-	setIsAuth(bool) {
-		this._isAuth = bool
 	}
 
 	setMentors(mentors) {
@@ -43,11 +65,17 @@ export default class Store {
 	setSelectedMentor(mentor) {
 		this._selectedMentor = mentor
 	}
+	setTypeCourse(typeCourse) {
+		this._typeCourse = typeCourse
+	}
+	setSelectedTypeCourse(selectedTypeCourse) {
+		this._selectedTypeCourse = selectedTypeCourse
+	}
 	setCourses(courses) {
 		this._courses = courses
 	}
-	setCourseType(type) {
-		this._courseType = type
+	setAllCourse(data) {
+		this._allCourses = data
 	}
 	setStudents(students) {
 		this._students = students
@@ -65,22 +93,18 @@ export default class Store {
 		this._role = role
 	}
 
-	setUsers(role) {
-		let i = null
-		if (localStorage.getItem('token') !== null) {
-			let token = localStorage.getItem('token')
-			i = JWTdecode(token)
-		}
-		this._users = i
-	}
-
 	get isAuth() {
 		return this._isAuth
 	}
 	get user() {
 		return this._user
 	}
-
+	get token() {
+		return this._token
+	}
+	get admin() {
+		return this._admin
+	}
 	get mentors() {
 		return this._mentors
 	}
@@ -93,6 +117,9 @@ export default class Store {
 	get courseType() {
 		return this._courseType
 	}
+	get allCourses() {
+		return this._allCourses
+	}
 	get students() {
 		return this._students
 	}
@@ -101,6 +128,12 @@ export default class Store {
 	}
 	get selectedCourse() {
 		return this._selectedCourse
+	}
+	get typeCourse() {
+		return this._typeCourse
+	}
+	get selectedTypeCourse() {
+		return this._selectedTypeCourse
 	}
 	get quantity() {
 		return this._quantityOfClasses

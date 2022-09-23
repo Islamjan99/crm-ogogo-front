@@ -28,6 +28,15 @@
 	display: flex;
 	justify-content: center;
 	margin-top: 20px;
+	color: #eae9e8;
+	font-weight: 800;
+	font-size: 16px;
+	line-height: 22px;
+	text-align: center;
+	text-transform: uppercase;
+	width: '100%';
+	margin: 14px 18px 15px 19px;
+	cursor: pointer;
 }
 .auth__btn:active {
 	-webkit-box-shadow: 4px 4px 42px -8px rgba(15, 48, 63, 0.5);

@@ -1,6 +1,6 @@
 /* List Mentors */
 .mentors__wrapper {
-	width: 1500px;
+	width: 1540px;
 	margin: 20px auto 0 auto;
 }
 
@@ -23,7 +23,7 @@
 
 .mentor__block::-webkit-scrollbar-thumb {
 	border-radius: 10px;
-	background-color: #9c00fd;
+	background-color: #0066ff;
 }
 
 .mentor__block::-webkit-scrollbar-track {

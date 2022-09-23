@@ -1,4 +1,7 @@
 .sideBar__wrapper {
+	position: sticky;
+	top: 0;
+	padding-top: 60px;
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
@@ -10,13 +13,9 @@
 	border-top-right-radius: 20px;
 	border-bottom-right-radius: 20px;
 }
-.sideBar__container {
-}
+
 .sideBar__title {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 60px;
+	text-align: center;
 }
 .sideBar__wrapper::-webkit-scrollbar {
 	width: 10px;

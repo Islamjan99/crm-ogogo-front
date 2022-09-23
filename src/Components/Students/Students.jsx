@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styles from './Students.module.css'
 import { Context } from '../../index'
-import H1 from '../UI/H1'
+import HTag from '../UI/Htag'
 import Button from '../UI/Button'
 import P from '../UI/P'
 import StudentItem from './StudentItem'
@@ -18,7 +18,8 @@ const Students = observer(() => {
 	const [students, setStudents] = useState([])
 	const [inpSearch, setInpSearch] = useState('')
 	const getInfo = () => {
-		fetchStudents().then(data => setStudents(data))
+		fetchStudents(Store.token).then(data => setStudents(data.data))
+
 		setLoading(false)
 	}
 	useEffect(() => {
@@ -53,7 +54,8 @@ const Students = observer(() => {
 	return (
 		<div className={styles.students__wrapper}>
 			<div className={styles.students__title}>
-				<H1
+				<HTag
+					tag={'h1'}
 					style={{
 						fontWeight: '500',
 						fontSize: '55px',
@@ -62,7 +64,7 @@ const Students = observer(() => {
 					}}
 				>
 					Студенты
-				</H1>
+				</HTag>
 				<div className={styles.search}>
 					<Input
 						type={'text'}
@@ -81,19 +83,6 @@ const Students = observer(() => {
 						alt={'Картинка поиска'}
 					/>
 				</div>
-				<Button
-					style={{
-						width: '200px',
-						padding: '12px 15px',
-						fontSize: '18px',
-						cursor: 'pointer',
-						background: 'rgb(106, 199, 106)',
-						border: 'rgb(106, 199, 106)',
-						borderRadius: '10px',
-					}}
-				>
-					Добавить студента
-				</Button>
 			</div>
 			<div className={styles.students__info}>
 				<P

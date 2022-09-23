@@ -1,0 +1,48 @@
+.typeCourse__wrapper {
+	max-width: 1640px;
+	width: 100%;
+	margin: 20px auto;
+}
+.typeCourse__title {
+	width: calc(100% - 100px);
+	margin: 0 auto;
+	text-align: center;
+}
+.typeCourse__block {
+	width: 250px;
+	min-height: 150px;
+	font-size: 18px;
+	font-weight: 500;
+	margin: 15px auto;
+	padding: 10px 15px;
+	border: 1px solid;
+	border-radius: 10px;
+}
+.typeCourse__item {
+	display: flex;
+	justify-content: space-between;
+	margin: 5px 0;
+}
+
+/* modal */
+
+.modal {
+	width: 100%;
+	position: absolute;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	transition: 1.5s;
+}
+.modal__none {
+	width: 100%;
+	position: absolute;
+	top: -300px;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	visibility: hidden;
+	transition: 1.5s;
+}

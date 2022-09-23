@@ -1,32 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Context } from '../..'
+import { fetchMentorPage } from '../../Http/API'
 import P from '../UI/P'
 import Span from '../UI/Span'
 import styles from './Courses.module.css'
 
 const CoursesItem = ({ courses }) => {
 	const { Store } = useContext(Context)
-	const [mentor, setMentor] = useState([])
-	const getMentor = () => {
-		Store.mentors.map(item => {
-			if (item.id === courses.mentor) {
-				setMentor({
-					...mentor,
-					name: item.name,
-					secondName: item.second_name,
-					phone: item.phone,
-				})
-			}
+	const [mentor, setMentor] = useState({})
 
-			return mentor
-		})
-	}
 	useEffect(() => {
-		if (mentor.length < 1) {
-			getMentor()
-		}
-	})
+		fetchMentorPage(courses.mentor).then(data => {
+			setMentor(data.data)
+		})
+	}, [])
 	return (
 		<Link to={`/course-page/${courses.id}`}>
 			<div className={styles.courses__item}>
@@ -34,8 +22,8 @@ const CoursesItem = ({ courses }) => {
 					style={{
 						fontFamily: 'Gilroy',
 						fontStyle: 'normal',
-						fontWeight: '400',
-						fontSize: '16px',
+						fontWeight: '500',
+						fontSize: '18px',
 						lineHeight: '100%',
 						color: '#FFFFFF',
 						background: '#5928e5',
@@ -43,7 +31,18 @@ const CoursesItem = ({ courses }) => {
 						borderRadius: '20px 20px 0 0',
 					}}
 				>
-					{courses.name} : {courses.start_date}
+					{`${courses.name} `}
+					<Span
+						style={{
+							fontFamily: 'Gilroy',
+							fontStyle: 'normal',
+							fontWeight: '400',
+							fontSize: '16px',
+							lineHeight: '100%',
+						}}
+					>
+						: {courses.start_date}
+					</Span>
 				</P>
 				<div className={styles.item__mentor}>
 					<P style={{ color: '#5C5C5C' }}>
@@ -56,7 +55,9 @@ const CoursesItem = ({ courses }) => {
 								color: '#000000',
 							}}
 						>
-							{` ${mentor.secondName}`}
+							{mentor.second_name !== undefined
+								? ` ${mentor.second_name}`
+								: ' ментор не выбран'}
 						</Span>
 					</P>
 					<P style={{ color: '#5C5C5C' }}>

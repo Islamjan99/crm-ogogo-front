@@ -17,6 +17,7 @@
 	align-items: center;
 }
 .students__info {
+	padding-right: 10px;
 	text-align: center;
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
 	border-radius: 20.9961px 20.9961px 0px 0px;
@@ -40,12 +41,27 @@
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
 	border-radius: 0px 0px 10px 10px;
 	padding-bottom: 7px;
-	cursor: pointer;
+}
+.students__block::-webkit-scrollbar {
+	width: 10px;
+	background-color: #f9f9fd;
+}
+
+.students__block::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: #ff6b00;
+}
+
+.students__block::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	background-color: #f9f9fd;
 }
 .student__item {
 	text-align: center;
 	display: grid;
-	grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr 1px 1fr;
+	grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr 1px 245px;
 	grid-template-rows: 1fr;
 	grid-column-gap: 5px;
 	border-bottom: 1px solid;
@@ -85,11 +101,12 @@
 
 .student__info {
 	position: relative;
-
 	width: 220px;
+	display: flex;
+	flex-direction: column;
 }
 .student__info input {
-	margin-bottom: 10px;
+	margin-bottom: 13px;
 }
 .student__paid {
 	display: grid;
@@ -119,12 +136,13 @@
 
 /* dropdown */
 .dropdown {
-	width: 130px;
+	width: 140px;
 	height: 42px;
-	margin-bottom: 18px;
+	margin-bottom: 12px;
 	margin-left: 10px;
 	position: relative;
 }
+
 .dropdown:hover .dropdown__list {
 	opacity: 1;
 	visibility: visible;
@@ -153,6 +171,8 @@
 	z-index: 10;
 }
 .dropdown__list {
+	overflow-y: scroll;
+	height: 155px;
 	text-align: center;
 	background: rgb(248, 248, 248);
 	border-radius: 0px 0px 10px 10px;
@@ -169,4 +189,41 @@
 .dropdown__list__item {
 	width: 100%;
 	cursor: pointer;
+}
+.dropdown__list::-webkit-scrollbar {
+	width: 10px;
+	background-color: #f9f9fd;
+}
+
+.dropdown__list::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: #9c00fd;
+}
+
+.dropdown__list::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	background-color: #f9f9fd;
+}
+/* modal */
+.modal {
+	width: 100%;
+	position: absolute;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	transition: 1.5s;
+}
+.modal__none {
+	width: 100%;
+	position: absolute;
+	top: -300px;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	visibility: hidden;
+	transition: 1.5s;
 }

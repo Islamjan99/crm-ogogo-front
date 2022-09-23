@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './Mentor.module.css'
 import { useNavigate, useParams } from 'react-router-dom'
 import P from '../UI/P'
@@ -10,18 +10,20 @@ import {
 	fetchMentorQuantity,
 	updateMentor,
 	deleteQuantity,
-	check,
 } from '../../Http/API'
-import H2 from '../UI/H2'
+import HTag from '../UI/Htag'
 import { observer } from 'mobx-react-lite'
 import Span from '../UI/Span'
+import { Context } from '../..'
 
 const ChangeMentor = observer(() => {
+	const { Store } = useContext(Context)
 	let navigate = useNavigate()
 	const [remove, setRemove] = useState(false)
 	const [mentor, setMentor] = useState([])
 	const [hidden, setHidden] = useState(false)
 	const [show, setShow] = useState(false)
+	const [infos, setInfos] = useState('')
 	const [quantity, setQuantity] = useState()
 	const [loading, setLoading] = useState(true)
 	let mentorId = useParams().id
@@ -29,15 +31,20 @@ const ChangeMentor = observer(() => {
 	const getQuantity = async () => {
 		let counter = 0
 		let i = []
-		await fetchMentorQuantity(mentorId).then(item => (i = item))
-		await i.map(item => (counter += item.quantity_of_classes))
-		await setQuantity(counter)
-		await fetchMentorPage(mentorId).then(data => {
-			setLoading(false)
-			if (data.status >= 200 && data.status <= 300) {
-				setMentor(data.data)
-			}
-		})
+		try {
+			await fetchMentorPage(mentorId).then(data => {
+				setLoading(false)
+				if (data.status >= 200 && data.status <= 300) {
+					setMentor(data.data)
+					console.log(data.data)
+				}
+			})
+			await fetchMentorQuantity(mentorId).then(item => (i = item))
+			await i.map(item => (counter += item.quantity_of_classes))
+			await setQuantity(counter)
+		} catch (e) {
+			navigate('/students')
+		}
 	}
 	const setInfo = event => {
 		setMentor({
@@ -45,21 +52,37 @@ const ChangeMentor = observer(() => {
 			[event.target.name]: event.target.value,
 		})
 	}
-	const setUpData = str => {
+	const setUpData = async str => {
 		if (str === 'update') {
-			updateMentor(mentorId, mentor).then(data =>
+			setInfos('Изменения сохранены')
+			await updateMentor(mentorId, mentor).then(data =>
 				data.status >= 200 && data.status < 300
 					? console.log('goot')
 					: console.log('false')
 			)
-			setHidden(true)
-			setShow(true)
+			await setHidden(true)
+			await setShow(true)
 		} else if (str === 'delete') {
-			deleteMentor(mentorId).then(data => console.log(data))
-			setHidden(true)
-			setShow(true)
+			if (mentor.course.length === 0) {
+				setInfos('Ментор удалён')
+				deleteMentor(mentorId).then(data => console.log(data))
+				setHidden(true)
+				setShow(true)
+			} else {
+				setInfos(
+					'ОТКАЗ! На менторе числится курс. Сначала смените в курсе ментора или удалите курс и попробуйте ещё раз!'
+				)
+				setHidden(true)
+				setShow(true)
+			}
 		}
+
+		console.log(mentor)
 	}
+	useEffect(() => {
+		getQuantity()
+	}, [mentorId])
+
 	let form = [
 		{ type: 'text', name: 'name', placeholder: `${mentor.name}` },
 		{
@@ -79,7 +102,6 @@ const ChangeMentor = observer(() => {
 		}, 1100)
 	}
 
-	getQuantity()
 	const resetQuantity = () => {
 		deleteQuantity(mentorId).then(data => console.log(data))
 	}
@@ -239,10 +261,8 @@ const ChangeMentor = observer(() => {
 			</div>
 			<div className={hidden ? styles.model__wrapper : styles.model__none}>
 				<div className={show ? styles.model__container : styles.model}>
-					<H2>Сообщение</H2>
-					<P style={{ marginTop: '10px' }}>
-						{remove ? 'Ментор удалён' : 'Изменения сохранены'}
-					</P>
+					<HTag tag={'h2'}>Сообщение</HTag>
+					<P style={{ marginTop: '10px' }}>{infos}</P>
 
 					<Button
 						onClick={shows}

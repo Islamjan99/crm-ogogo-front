@@ -13,6 +13,11 @@
 	text-decoration: none;
 	font-family: 'Inter', sans-serif;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
 .App {
 	width: 100%;
 	display: flex;
@@ -341,4 +346,44 @@
 		font-size: 45px;
 		font-weight: 600;
 	}
+}
+
+.modals__wrapper {
+	border-radius: 10px;
+	padding: 15px;
+	margin-top: 10px;
+	height: 200px;
+	background: white;
+	box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.5);
+}
+.modals__container {
+	border-radius: 10px;
+	padding: 15px;
+	margin-top: 10px;
+	height: 200px;
+	background: white;
+	box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.5);
+}
+.line {
+	width: 100%;
+	margin: 10px 0;
+	border-bottom: 1px solid grey;
+}
+.text {
+	width: 260px;
+	font-weight: 500;
+	font-size: 18px;
+	min-height: 80px;
+}
+.modal__btn {
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-between;
+}
+.pagination {
+	width: 350px;
+	margin: 20px auto 0 auto;
+	text-align: center;
 }

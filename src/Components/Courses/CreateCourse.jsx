@@ -2,8 +2,7 @@ import React, { useContext, useState } from 'react'
 import styles from './Courses.module.css'
 import { observer } from 'mobx-react-lite'
 import Input from '../UI/Input'
-import P from '../UI/P'
-import H2 from '../UI/H2'
+import HTag from '../UI/Htag'
 import Button from '../UI/Button'
 import { Context } from '../..'
 import { createCourse } from '../../Http/API'
@@ -16,14 +15,19 @@ const CreateCourse = observer(({ show, setShow }) => {
 		setCourse({ ...course, [event.target.name]: event.target.value })
 	}
 
-	const hidden = () => {
-		createCourse(course).then(data => console.log(data))
-		setShow(false)
-		window.location.reload()
+	const hidden = async () => {
+		await createCourse(course).then(data => console.log(data))
+		await setShow(false)
+		await window.location.reload()
 	}
 	const addMentor = mentor => {
 		Store.setSelectedMentor(mentor)
 		setCourse({ ...course, mentor: mentor.id })
+	}
+	const addTypeCourse = typeCourse => {
+		console.log(typeCourse)
+		Store.setSelectedTypeCourse(typeCourse)
+		setCourse({ ...course, type: typeCourse.id })
 	}
 
 	return (
@@ -33,27 +37,52 @@ const CreateCourse = observer(({ show, setShow }) => {
 			}
 		>
 			<div className={styles.createCourse__container}>
-				<H2 style={{ textAlign: 'center' }}>Создание курса</H2>
+				<HTag tag={'h2'} style={{ textAlign: 'center' }}>
+					Создание курса
+				</HTag>
+
 				<div className={styles.createCourse__block}>
 					<form onChange={changeHandler}>
-						<div className={styles.dropdown}>
-							<div tabIndex={1} className={styles.dropdown__select}>
-								<span className={styles.select}>
-									{Store.selectedMentor.name || 'Выберите ментора'}
-								</span>
+						<div className={styles.dropdown__block}>
+							<div className={styles.dropdown}>
+								<div tabIndex={1} className={styles.dropdown__select}>
+									<span className={styles.select}>
+										{Store.selectedTypeCourse.type || 'Выберите тип курса'}
+									</span>
+								</div>
+								<div className={styles.dropdown__list}>
+									{Store.typeCourse.map((item, index) => {
+										return (
+											<div
+												key={index}
+												onClick={() => addTypeCourse(item)}
+												className={styles.dropdown__list__item}
+											>
+												{item.type}
+											</div>
+										)
+									})}
+								</div>
 							</div>
-							<div className={styles.dropdown__list}>
-								{Store.mentors.map((item, index) => {
-									return (
-										<div
-											key={index}
-											onClick={() => addMentor(item)}
-											className={styles.dropdown__list__item}
-										>
-											{item.name}
-										</div>
-									)
-								})}
+							<div className={styles.dropdown}>
+								<div tabIndex={1} className={styles.dropdown__select}>
+									<span className={styles.select}>
+										{Store.selectedMentor.name || 'Выберите ментора'}
+									</span>
+								</div>
+								<div className={styles.dropdown__list}>
+									{Store.mentors.map((item, index) => {
+										return (
+											<div
+												key={index}
+												onClick={() => addMentor(item)}
+												className={styles.dropdown__list__item}
+											>
+												{item.name}
+											</div>
+										)
+									})}
+								</div>
 							</div>
 						</div>
 						<Input
