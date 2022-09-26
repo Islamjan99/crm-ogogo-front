@@ -4,11 +4,12 @@ import JWTdecode from 'jwt-decode'
 export default class Store {
 	constructor() {
 		this._isAuth = false
+		this._isActive = false
 		this._user = {}
 		this._token = ''
 		this._page = 1
 		this._totalCount = 0
-		this._limit = 9
+		this._limit = 10
 		this._role = {}
 		this._users = []
 		this._admin = ''
@@ -25,7 +26,9 @@ export default class Store {
 		this._selectedStudents = {}
 		makeAutoObservable(this)
 	}
-
+	setIsActive(bool) {
+		this._isActive = bool
+	}
 	setIsAuth(bool) {
 		this._isAuth = bool
 	}
@@ -92,7 +95,9 @@ export default class Store {
 	setRole(role) {
 		this._role = role
 	}
-
+	get isActive() {
+		return this._isActive
+	}
 	get isAuth() {
 		return this._isAuth
 	}

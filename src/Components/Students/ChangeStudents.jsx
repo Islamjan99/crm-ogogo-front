@@ -38,7 +38,7 @@ const ChangeStudents = observer(() => {
 			setPaid({
 				...paid,
 				first_month_paid: data.first_month_paid,
-				second_month_paid: data.first_month_paid,
+				second_month_paid: data.second_month_paid,
 				third_month_paid: data.third_month_paid,
 				fourth_month_paid: data.fourth_month_paid,
 			})
@@ -56,6 +56,7 @@ const ChangeStudents = observer(() => {
 	}, [])
 
 	const setInfo = event => {
+		console.log(paid)
 		if (event.target.name !== 'course') {
 			setChangeStudent({
 				...changeStudent,
@@ -367,7 +368,7 @@ const ChangeStudents = observer(() => {
 						fontWeight: '500',
 					}}
 				>
-					Удалить ученика
+					s Удалить ученика
 				</Button>
 				<div className={hidden ? styles.modal : styles.modal__none}>
 					<Modals

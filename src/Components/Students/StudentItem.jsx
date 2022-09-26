@@ -93,16 +93,29 @@ const StudentItem = ({ student }) => {
 			>
 				{course.name}
 			</P>
-			<div className={styles.line}></div>
+			<div
+				className={window.outerWidth < '1200' ? styles.none : styles.line}
+			></div>
 			<P
 				onClick={() => changeStudent('student')}
-				style={{
-					fontWeight: '400',
-					fontSize: '18px',
-					lineHeight: '100%',
-					padding: '8px 0',
-					cursor: 'pointer',
-				}}
+				style={
+					window.outerWidth < '1200'
+						? {
+								display: 'none',
+								fontWeight: '400',
+								fontSize: '18px',
+								lineHeight: '100%',
+								padding: '8px 0',
+								cursor: 'pointer',
+						  }
+						: {
+								fontWeight: '400',
+								fontSize: '18px',
+								lineHeight: '100%',
+								padding: '8px 0',
+								cursor: 'pointer',
+						  }
+				}
 			>
 				{paid}
 			</P>

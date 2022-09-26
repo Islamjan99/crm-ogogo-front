@@ -25,7 +25,6 @@ const CreateCourse = observer(({ show, setShow }) => {
 		setCourse({ ...course, mentor: mentor.id })
 	}
 	const addTypeCourse = typeCourse => {
-		console.log(typeCourse)
 		Store.setSelectedTypeCourse(typeCourse)
 		setCourse({ ...course, type: typeCourse.id })
 	}
@@ -122,11 +121,11 @@ const CreateCourse = observer(({ show, setShow }) => {
 								if (
 									course.name !== undefined &&
 									course.address !== undefined &&
-									course.description !== undefined &&
 									course.start_date !== undefined &&
+									course.mentor !== undefined &&
+									course.type !== undefined &&
 									course.name !== '' &&
 									course.address !== '' &&
-									course.description !== '' &&
 									course.start_date !== ''
 								) {
 									hidden()
@@ -135,11 +134,11 @@ const CreateCourse = observer(({ show, setShow }) => {
 							style={
 								course.name !== undefined &&
 								course.address !== undefined &&
-								course.description !== undefined &&
 								course.start_date !== undefined &&
+								course.mentor !== undefined &&
+								course.type !== undefined &&
 								course.name !== '' &&
 								course.address !== '' &&
-								course.description !== '' &&
 								course.start_date !== ''
 									? {
 											padding: '12px 15px',

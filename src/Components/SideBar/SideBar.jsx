@@ -14,6 +14,7 @@ import HTag from '../UI/Htag'
 
 const SideBar = () => {
 	const { Store } = useContext(Context)
+	const [active, setActive] = useState(false)
 
 	useEffect(() => {
 		fetchSubAdmin().then(data => Store.setAdmin(data))
@@ -29,7 +30,7 @@ const SideBar = () => {
 	}, [Store, Store.quantity, Store.token])
 
 	return (
-		<div className={styles.sideBar__wrapper}>
+		<div className={active ? 'sideBar__wrapper active' : 'sideBar__wrapper'}>
 			<Link to={'/'}>
 				<div className={styles.sideBar__title}>
 					<HTag
@@ -45,6 +46,12 @@ const SideBar = () => {
 					</HTag>
 				</div>
 			</Link>
+			<div
+				className={active ? 'burger active' : 'burger'}
+				onClick={() => setActive(!active)}
+			>
+				<span className='material-icons'>chevron_right</span>
+			</div>
 			<NavBar />
 		</div>
 	)

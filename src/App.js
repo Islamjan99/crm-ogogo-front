@@ -28,8 +28,12 @@ function App() {
 		} else {
 			setLoading(false)
 		}
-	}, [Store, loading])
-
+	}, [Store, loading, Store.isActive])
+	const test = () => {
+		console.log('asdf')
+		Store.setIsActive(!Store.isActive)
+		console.log(Store.isActive)
+	}
 	if (loading) {
 		return (
 			<div className='ani'>
@@ -63,6 +67,7 @@ function App() {
 						<Route path='/archive-courses' element={<Courses />} />
 						<Route path='/students' element={<Students />} />
 						<Route path='/course-page/:id' element={<CoursePage />} />
+						<Route path='/archive-course-page/:id' element={<CoursePage />} />
 						<Route path='/change-student/:id' element={<ChangeStudent />} />
 						<Route path='/change-mentor/:id' element={<ChangeMentor />} />
 					</Routes>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './Auth.module.css'
 import HTag from '../UI/Htag'
 import Input from '../UI/Input'
@@ -19,7 +19,6 @@ const Auth = () => {
 
 	const authorization = () => {
 		login(user).then(data => {
-			console.log(data)
 			if (data.status < 300) {
 				Store.setUser(jwt_decode(data.data.access))
 				sessionStorage.setItem('token', JSON.stringify(data.data.access))
@@ -77,6 +76,7 @@ const Auth = () => {
 						place={'password'}
 						name={'password'}
 						onChange={setInfo}
+						onKeyDown={e => e.key === 'Enter' && authorization()}
 					/>
 					<Img
 						onClick={changePassword}

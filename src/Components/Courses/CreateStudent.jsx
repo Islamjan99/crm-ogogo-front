@@ -125,7 +125,7 @@ const CreateStudent = observer(({ show, setShow, courseId }) => {
 						<Input
 							type={'number'}
 							name={'fourth_month_paid'}
-							place={'Ветвертый месяц'}
+							place={'Четвертый месяц'}
 							style={{
 								fontSize: '16px',
 								borderBottom: '1px solid black',

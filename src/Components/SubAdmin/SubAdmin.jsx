@@ -1,16 +1,20 @@
 import { observer } from 'mobx-react-lite'
 import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../..'
-import { fetchSubAdmin } from '../../Http/API'
+import { deleteSubAdmin, fetchSubAdmin } from '../../Http/API'
 import Button from '../UI/Button'
 import HTag from '../UI/Htag'
 import CreateAdmin from './CreateAdmin'
 import styles from './SubAdmin.module.css'
 import SubAdminItem from './SubAdminItem'
+import Modals from '../../Modals'
 
 const SubAdmin = observer(() => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [subAdmin, setSubAdmin] = useState([])
+	const [hidden, setHidden] = useState(false)
+	const [message, setMessage] = useState()
+	const [deleteId, setDeleteId] = useState(0)
 	const { Store } = useContext(Context)
 
 	useEffect(() => {
@@ -20,6 +24,18 @@ const SubAdmin = observer(() => {
 			fetchSubAdmin().then(data => setSubAdmin(data))
 		}
 	}, [])
+
+	const check = id => {
+		setDeleteId(id)
+		setMessage('Вы действительно хотите удалить администратора?')
+		setHidden(true)
+	}
+	const deletAdmin = () => {
+		deleteSubAdmin(deleteId).then(data => {
+			setHidden(false)
+			window.location.reload()
+		})
+	}
 
 	return (
 		<div className={styles.subAdmin__wrapper}>
@@ -55,10 +71,18 @@ const SubAdmin = observer(() => {
 			</div>
 			<div className={styles.subAdmin__container}>
 				{subAdmin.map((item, i) => {
-					return <SubAdminItem subAdmin={item} key={i} />
+					return <SubAdminItem subAdmin={item} key={i} fun={check} />
 				})}
 			</div>
 			<CreateAdmin show={isOpen} setShow={setIsOpen} />
+			<div className={hidden ? styles.modal : styles.modal__none}>
+				<Modals
+					show={hidden}
+					setShow={setHidden}
+					fun={deletAdmin}
+					info={message}
+				/>
+			</div>
 		</div>
 	)
 })

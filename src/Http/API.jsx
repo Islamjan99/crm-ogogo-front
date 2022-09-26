@@ -133,10 +133,15 @@ export const updateSubAdmin = async (id, course) => {
 	return data
 }
 export const createSubAdmin = async admin => {
-	const { data } = await $authHost.post('administrator/create_subadmin/', admin)
+	let data
+	try {
+		data = await $authHost.post('administrator/create_subadmin/', admin)
+	} catch (e) {
+		data = e.response.data
+	}
 	return data
 }
-export const deleteSubAdmin = async () => {
-	const { data } = await $authHost.delete('administrator/id/delete/')
+export const deleteSubAdmin = async id => {
+	const { data } = await $authHost.delete(`administrator/${id}/delete/`)
 	return data
 }

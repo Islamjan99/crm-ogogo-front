@@ -227,3 +227,26 @@
 	visibility: hidden;
 	transition: 1.5s;
 }
+/*  */
+@media screen and (max-width: 1440px) {
+	.students__wrapper {
+		max-width: 1100px;
+		width: calc(100% - 100px);
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.students__wrapper {
+		max-width: 870px;
+		width: calc(100% - 100px);
+	}
+	.students__info,
+	.student__item {
+		grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr;
+	}
+}
+@media screen and (max-width: 1024px) {
+	.students__wrapper {
+		max-width: 700px;
+	}
+}

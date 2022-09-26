@@ -54,18 +54,15 @@
 }
 .courses__block {
 	padding: 5px;
+	overflow-y: scroll;
+	padding-top: 20px;
+	height: 625px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	padding-right: 13px;
 }
-.courses__block_archive {
-	overflow-y: scroll;
-	padding: 5px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-}
+
 .courses__block_archive::-webkit-scrollbar {
 	width: 10px;
 	background-color: #f9f9fd;
@@ -492,4 +489,17 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+/*  */
+
+@media screen and (max-width: 1024px) {
+	.course__wrapper {
+		margin-top: 5px;
+	}
+	.description {
+		height: 70px;
+	}
+	.courses__item {
+		height: 225px;
+	}
 }

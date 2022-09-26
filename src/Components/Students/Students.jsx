@@ -130,15 +130,28 @@ const Students = observer(() => {
 				>
 					Курс
 				</P>
-				<div className={styles.line}></div>
+				<div
+					className={window.outerWidth < '1200' ? styles.none : styles.line}
+				></div>
 				<P
-					style={{
-						fontWeight: '500',
-						fontSize: '18px',
-						lineHeight: '100%',
-						color: '#00FF29',
-						padding: ' 5px 0',
-					}}
+					style={
+						window.outerWidth < '1200'
+							? {
+									display: 'none',
+									fontWeight: '500',
+									fontSize: '18px',
+									lineHeight: '100%',
+									color: '#00FF29',
+									padding: ' 5px 0',
+							  }
+							: {
+									fontWeight: '500',
+									fontSize: '18px',
+									lineHeight: '100%',
+									color: '#00FF29',
+									padding: ' 5px 0',
+							  }
+					}
 				>
 					Оплата
 				</P>

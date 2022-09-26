@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styles from './Courses.module.css'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Context } from '../..'
 import { deleteCourse, fetchCoursePage, updateCourse } from '../../Http/API'
 import P from '../UI/P'
@@ -18,7 +18,7 @@ const CoursePage = observer(() => {
 	const [courses, setCourses] = useState({})
 	const [coursesType, setCoursesType] = useState({})
 	const [students, setStudents] = useState([])
-
+	let location = useLocation()
 	const [hidden, setHidden] = useState(false)
 	const [message, setMessage] = useState()
 	const [fun, setFun] = useState()
@@ -40,6 +40,7 @@ const CoursePage = observer(() => {
 		})
 	}
 	const setInfo = event => {
+		console.log(courses)
 		setCourses({
 			...courses,
 			[event.target.name]: event.target.value,
@@ -66,7 +67,7 @@ const CoursePage = observer(() => {
 		} else {
 			setFun(false)
 			setHidden(true)
-			setMessage('Вы действительно хотите удалить ученика')
+			setMessage('Вы действительно хотите заархивировать курс')
 		}
 	}
 	const addMentor = mentor => {
@@ -347,7 +348,7 @@ const CoursePage = observer(() => {
 						fontWeight: '600',
 					}}
 				>
-					Заархивировать курс
+					{courses.active !== true ? 'Удалить курс' : 'Заархивировать курс'}
 				</Button>
 			</div>
 			<div className={hidden ? styles.modal : styles.modal__none}>

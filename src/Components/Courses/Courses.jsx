@@ -10,7 +10,7 @@ import HTag from '../UI/Htag'
 import CoursesItem from './CoursesItem'
 import CreateCourse from './CreateCourse'
 import ShirtSkeleton from '../ShirtBlock/ShirtSkeleton'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const Course = observer(() => {
 	const { Store } = useContext(Context)
@@ -100,17 +100,19 @@ const Course = observer(() => {
 						</Button>
 					</div>
 				</div>
-				<div
-					className={
-						courses.length > 5
-							? styles.courses__block
-							: styles.courses__block_archive
-					}
-				>
+				<div className={styles.courses__block}>
 					{loading
 						? [...new Array(5)].map((_, index) => <ShirtSkeleton key={index} />)
 						: courses.map(course => (
-								<CoursesItem key={course.id} courses={course} />
+								<Link
+									to={
+										location.pathname !== '/archive-courses'
+											? `/course-page/${course.id}`
+											: `/archive-course-page/${courses.id}`
+									}
+								>
+									<CoursesItem key={course.id} courses={course} />
+								</Link>
 						  ))}
 				</div>
 			</div>
